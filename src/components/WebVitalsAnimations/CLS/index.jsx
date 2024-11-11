@@ -12,7 +12,7 @@ const animationProps = {
     type: "spring",
     damping: 20,
     stiffness: 100,
-  }
+  },
 };
 
 const items = [
@@ -66,15 +66,7 @@ const items = [
   ),
 ];
 
-const shifts = [
-  20,
-  30,
-  40,
-  50,
-  60,
-  100,
-  120
-]
+const shifts = [20, 30, 40, 50, 60, 100, 120];
 
 export default function CLS() {
   const [elements, setElements] = React.useState(0);

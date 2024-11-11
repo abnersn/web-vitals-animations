@@ -7,9 +7,11 @@ import Timer from "../Timer";
 
 export default function LCP() {
   const [scope, animate] = useAnimate();
+  const buttonRef = React.useRef(null);
   const timerRef = React.useRef(null);
 
   const loadPage = async () => {
+    buttonRef.current.disabled = true;
     timerRef.current.reset();
     timerRef.current.start();
     animate(
@@ -39,6 +41,7 @@ export default function LCP() {
       }
     ).then(() => {
       timerRef.current.stop();
+      buttonRef.current.disabled = false;
     });
   };
 
@@ -50,7 +53,9 @@ export default function LCP() {
     <section className={styles.container}>
       <div className={styles.page} ref={scope}>
         <div className={lcpStyles.item} />
-        <div className={[lcpStyles.main, lcpStyles.item].join(' ')}>largest content</div>
+        <div className={[lcpStyles.main, lcpStyles.item].join(" ")}>
+          largest content
+        </div>
         <div className={lcpStyles.item} />
         <div className={lcpStyles.item} />
         <div className={lcpStyles.item} />
@@ -59,7 +64,11 @@ export default function LCP() {
         <h4>Time to LCP</h4>
         <Timer ref={timerRef} />
         <p className={styles.info}>Click refresh to calculate LCP</p>
-        <button onClick={handleRefresh} className={styles.button}>
+        <button
+          ref={buttonRef}
+          onClick={handleRefresh}
+          className={styles.button}
+        >
           Refresh
         </button>
       </div>
