@@ -1,6 +1,8 @@
 import { stagger, useAnimate } from "framer-motion";
-import styles from "./styles.module.css";
 import React from "react";
+
+import styles from "../styles.module.css";
+import lcpStyles from "./styles.module.css";
 
 const Timer = React.forwardRef((_props, ref) => {
   const [isActive, setIsActive] = React.useState(false);
@@ -28,7 +30,7 @@ const Timer = React.forwardRef((_props, ref) => {
   }));
 
   return (
-    <p className={styles.timer}>
+    <p className={styles.counter}>
       <strong>{time}</strong>
       <small>ms</small>
     </p>
@@ -43,7 +45,7 @@ export default function LCP() {
     timerRef.current.reset();
     timerRef.current.start();
     animate(
-      "div.item",
+      `div.${lcpStyles.item}`,
       {
         opacity: [0, 1],
         scale: [0.7, 1],
@@ -56,7 +58,7 @@ export default function LCP() {
       }
     );
     animate(
-      `div.${styles.main}`,
+      `div.${lcpStyles.main}`,
       {
         opacity: [0, 1],
         scale: [0.7, 1],
@@ -79,15 +81,16 @@ export default function LCP() {
   return (
     <section className={styles.container}>
       <div className={styles.page} ref={scope}>
-        <div className="item" />
-        <div className={styles.main}>largest content</div>
-        <div className="item" />
-        <div className="item" />
-        <div className="item" />
+        <div className={lcpStyles.item} />
+        <div className={[lcpStyles.main, lcpStyles.item].join(' ')}>largest content</div>
+        <div className={lcpStyles.item} />
+        <div className={lcpStyles.item} />
+        <div className={lcpStyles.item} />
       </div>
       <div className={styles.control}>
         <h4>Time to LCP</h4>
         <Timer ref={timerRef} />
+        <p className={styles.info}>Click refresh to calculate LCP</p>
         <button onClick={handleRefresh} className={styles.replay}>
           Refresh
         </button>

@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
-import styles from "./styles.module.css";
 import React from "react";
 import { range } from "lodash";
+
+import styles from "../styles.module.css";
+import clsStyles from "./styles.module.css";
 
 const animationProps = {
   initial: { opacity: 0, scale: 0 },
@@ -18,7 +20,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(214, 68%, 69%)" }}
-      className={styles.headerItem}
+      className={clsStyles.headerItem}
       {...animationProps}
     />
   ),
@@ -26,7 +28,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(140, 68%, 69%)" }}
-      className={styles.item}
+      className={clsStyles.item}
       {...animationProps}
     />
   ),
@@ -34,7 +36,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(100, 68%, 69%)" }}
-      className={styles.item}
+      className={clsStyles.item}
       {...animationProps}
     />
   ),
@@ -42,7 +44,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(60, 68%, 69%)" }}
-      className={styles.item}
+      className={clsStyles.item}
       {...animationProps}
     />
   ),
@@ -50,7 +52,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(30, 68%, 69%)" }}
-      className={styles.item}
+      className={clsStyles.item}
       {...animationProps}
     />
   ),
@@ -58,7 +60,7 @@ const items = [
     <motion.div
       layout
       style={{ backgroundColor: "hsl(10, 68%, 69%)" }}
-      className={styles.footerItem}
+      className={clsStyles.footerItem}
       {...animationProps}
     />
   ),
@@ -113,6 +115,7 @@ export default function CLS() {
         <p className={styles.counter}>
           <strong>{value}</strong>
         </p>
+        <p className={styles.info}>Click button to trigger CLS</p>
         <button onClick={handleRefresh} className={styles.replay}>
           Refresh
         </button>

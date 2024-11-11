@@ -1,6 +1,7 @@
 import "./App.css";
-import LCP from "./components/LCP";
-import CLS from "./components/CLS";
+import LCP from "./components/WebVitalsAnimations/LCP";
+import CLS from "./components/WebVitalsAnimations/CLS";
+import INP from "./components/WebVitalsAnimations/INP";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <h1>Web Vitals animations</h1>
       <LCP />
       <CLS />
+      <INP />
     </div>
   );
 }
