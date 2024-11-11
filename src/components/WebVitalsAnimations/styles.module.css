@@ -67,6 +67,7 @@
 .counter {
   font-size: 32px;
   line-height: 1;
+  margin-bottom: 8px;
   strong {
     font-weight: bold;
     color: hsl(200, 25%, 8%);
@@ -75,6 +76,7 @@
 
 .info {
   color: rgb(14, 82, 171);
+  font-size: 14px;
   font-weight: 500;
   margin-top: auto;
   text-align: right;

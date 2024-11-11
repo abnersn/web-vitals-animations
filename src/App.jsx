@@ -1,7 +1,9 @@
 import "./App.css";
+
 import LCP from "./components/WebVitalsAnimations/LCP";
 import CLS from "./components/WebVitalsAnimations/CLS";
 import INP from "./components/WebVitalsAnimations/INP";
+import MLS from "./components/WebVitalsAnimations/MLS";
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
       <LCP />
       <CLS />
       <INP />
+      <MLS />
     </div>
   );
 }

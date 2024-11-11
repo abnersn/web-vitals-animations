@@ -1,0 +1,18 @@
+.item {
+  border-radius: 2px;
+  order: 1;
+}
+
+.headerItem {
+  order: 0;
+}
+
+.footerItem {
+  order: 2;
+}
+
+.headerItem,
+.footerItem {
+  border-radius: 2px;
+  grid-column: 1/-1;
+}

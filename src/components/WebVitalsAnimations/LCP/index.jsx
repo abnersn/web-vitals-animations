@@ -41,6 +41,7 @@ export default function LCP() {
       }
     ).then(() => {
       timerRef.current.stop();
+      timerRef.current.finish();
       buttonRef.current.disabled = false;
     });
   };

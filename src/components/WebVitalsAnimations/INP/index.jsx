@@ -30,6 +30,7 @@ export default function INP() {
     setTimeout(() => {
       timerRef.current.stop();
       buttonRef.current.disabled = false;
+      timerRef.current.finish();
     }, 700);
   };
 

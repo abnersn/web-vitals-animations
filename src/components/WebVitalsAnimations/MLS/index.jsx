@@ -1,9 +1,10 @@
-import { motion, useAnimate } from "framer-motion";
+import { motion } from "framer-motion";
 import React from "react";
 import { range } from "lodash";
 
 import styles from "../styles.module.css";
 import clsStyles from "./styles.module.css";
+import Timer from "../Timer";
 
 const animationProps = {
   initial: { opacity: 0, scale: 0 },
@@ -19,7 +20,7 @@ const items = [
   () => (
     <motion.div
       layout
-      style={{ backgroundColor: "hsl(214, 68%, 69%)" }}
+      style={{ backgroundColor: "hsl(100, 68%, 69%)" }}
       className={clsStyles.headerItem}
       {...animationProps}
     />
@@ -27,23 +28,23 @@ const items = [
   () => (
     <motion.div
       layout
-      style={{ backgroundColor: "hsl(140, 68%, 69%)" }}
-      className={clsStyles.item}
-      {...animationProps}
-    />
-  ),
-  () => (
-    <motion.div
-      layout
-      style={{ backgroundColor: "hsl(100, 68%, 69%)" }}
-      className={clsStyles.item}
-      {...animationProps}
-    />
-  ),
-  () => (
-    <motion.div
-      layout
       style={{ backgroundColor: "hsl(60, 68%, 69%)" }}
+      className={clsStyles.item}
+      {...animationProps}
+    />
+  ),
+  () => (
+    <motion.div
+      layout
+      style={{ backgroundColor: "hsl(214, 68%, 69%)" }}
+      className={clsStyles.item}
+      {...animationProps}
+    />
+  ),
+  () => (
+    <motion.div
+      layout
+      style={{ backgroundColor: "hsl(140, 68%, 69%)" }}
       className={clsStyles.item}
       {...animationProps}
     />
@@ -66,34 +67,47 @@ const items = [
   ),
 ];
 
-const shifts = [20, 30, 40, 50, 60, 100, 120];
-
-export default function CLS() {
-  const [scope, animate] = useAnimate();
-  const [elements, setElements] = React.useState(0);
-  const [value, setValue] = React.useState(0);
-
-  const finish = () => {
-    animate(`.${styles.counter}`, {
-      scale: [1, 1.1]
-    }, {
-      delay: 0.2,
-      type: "spring",
-      damping: 80,
-      repeat: 1,
-      repeatType: "reverse",
-      stiffness: 1000,
-    })
-  }
+const CooldownTime = ({ onHide = () => { } }) => {
+  const [time, setTime] = React.useState(0);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
+      if (time === 2) {
+        onHide();
+      }
+      if (time < 3) {
+        setTime((t) => t + 1);
+      } else {
+        clearTimeout(interval);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  });
+
+  if (time === 3) {
+    return null;
+  }
+
+  return <p>Cooldown time ({time}s)</p>
+}
+
+export default function MLS() {
+  const [status, setStatus] = React.useState("idle");
+  const [elements, setElements] = React.useState(0);
+  const timerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    if (elements === 0) {
+      timerRef.current.reset();
+      timerRef.current.start();
+    }
+    const interval = setInterval(() => {
       setElements((e) => {
         if (e < items.length) {
-          setValue((v) => v + shifts[e]);
           return e + 1;
         }
-        finish();
+        timerRef.current.stop();
+        setStatus("cooldown");
         clearInterval(interval);
         return e;
       });
@@ -105,8 +119,8 @@ export default function CLS() {
   });
 
   const handleRefresh = () => {
-    setValue(0);
     setElements(0);
+    setStatus("shifting");
   };
 
   return (
@@ -117,11 +131,13 @@ export default function CLS() {
           return <Item key={i} />;
         })}
       </div>
-      <div className={styles.control} ref={scope}>
-        <h4>Cumulative Layout Shift</h4>
-        <p className={styles.counter}>
-          <strong>{value}</strong>
-        </p>
+      <div className={styles.control}>
+        <h4>MFE Layout Stabilization</h4>
+        <Timer ref={timerRef} />
+        {status === "shifting" && <p>Layout is shifting...</p>}
+        {status === "cooldown" && <CooldownTime onHide={() => {
+          timerRef.current.finish();
+        }} />}
         <p className={styles.info}>Click refresh to calculate CLS</p>
         <button onClick={handleRefresh} className={styles.button}>
           Refresh
