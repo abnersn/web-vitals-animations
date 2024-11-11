@@ -3,39 +3,7 @@ import React from "react";
 
 import styles from "../styles.module.css";
 import lcpStyles from "./styles.module.css";
-
-const Timer = React.forwardRef((_props, ref) => {
-  const [isActive, setIsActive] = React.useState(false);
-  const [time, setTime] = React.useState(0);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      if (isActive) {
-        setTime((t) => t + 1);
-      }
-    }, 1);
-    return () => clearInterval(interval);
-  });
-
-  React.useImperativeHandle(ref, () => ({
-    start() {
-      setIsActive(true);
-    },
-    stop() {
-      setIsActive(false);
-    },
-    reset() {
-      setTime(0);
-    },
-  }));
-
-  return (
-    <p className={styles.counter}>
-      <strong>{time}</strong>
-      <small>ms</small>
-    </p>
-  );
-});
+import Timer from "../Timer";
 
 export default function LCP() {
   const [scope, animate] = useAnimate();
@@ -91,7 +59,7 @@ export default function LCP() {
         <h4>Time to LCP</h4>
         <Timer ref={timerRef} />
         <p className={styles.info}>Click refresh to calculate LCP</p>
-        <button onClick={handleRefresh} className={styles.replay}>
+        <button onClick={handleRefresh} className={styles.button}>
           Refresh
         </button>
       </div>

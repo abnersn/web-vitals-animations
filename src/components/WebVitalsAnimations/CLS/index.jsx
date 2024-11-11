@@ -115,8 +115,8 @@ export default function CLS() {
         <p className={styles.counter}>
           <strong>{value}</strong>
         </p>
-        <p className={styles.info}>Click button to trigger CLS</p>
-        <button onClick={handleRefresh} className={styles.replay}>
+        <p className={styles.info}>Click refresh to calculate CLS</p>
+        <button onClick={handleRefresh} className={styles.button}>
           Refresh
         </button>
       </div>
