@@ -1,6 +1,6 @@
-import './App.css';
-import LCP from './components/LCP';
-import CLS from './components/CLS';
+import "./App.css";
+import LCP from "./components/LCP";
+import CLS from "./components/CLS";
 
 function App() {
   return (

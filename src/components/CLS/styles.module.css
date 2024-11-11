@@ -33,39 +33,17 @@
   height: 100%;
   display: grid;
   grid-template-columns: 48px 1fr;
+  grid-template-rows: repeat(4, 1fr);
   gap: 12px;
   padding: 12px;
 }
 
-.page > * {
+.item {
   background: hsl(214, 68%, 69%);
   border-radius: 2px;
-  min-height: 16px;
-  max-height: 48px;
-}
-
-.page > *:nth-child(1) {
-  background-color: hsl(214, 68%, 69%);
-}
-.page > *:nth-child(2) {
-  background-color: hsl(140, 68%, 69%);
-}
-.page > *:nth-child(3) {
-  background-color: hsl(100, 68%, 69%);
-}
-.page > *:nth-child(4) {
-  background-color: hsl(60, 68%, 69%);
-}
-.page > *:nth-child(5) {
-  background-color: hsl(30, 68%, 69%);
-}
-.page > *:nth-child(6) {
-  background-color: hsl(10, 68%, 69%);
-}
-
-.page > *:first-child,
-.page > *:last-child {
-  grid-column: 1/-1;
+  &.wide {
+    grid-column: 1/-1;
+  }
 }
 
 .replay {

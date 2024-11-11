@@ -1,7 +1,34 @@
-import { stagger, useAnimate } from 'framer-motion'
-import styles from './styles.module.css'
-import React from 'react';
-import { range } from 'lodash';
+import { stagger, useAnimate } from "framer-motion";
+import styles from "./styles.module.css";
+import React from "react";
+import { range } from "lodash";
+
+const items = [
+  () => (
+    <div
+      style={{ backgroundColor: "hsl(214, 68%, 69%)" }}
+      className="item wide"
+    />
+  ),
+  () => (
+    <div style={{ backgroundColor: "hsl(140, 68%, 69%)" }} className="item" />
+  ),
+  () => (
+    <div style={{ backgroundColor: "hsl(100, 68%, 69%)" }} className="item" />
+  ),
+  () => (
+    <div style={{ backgroundColor: "hsl(60, 68%, 69%)" }} className="item" />
+  ),
+  () => (
+    <div style={{ backgroundColor: "hsl(30, 68%, 69%)" }} className="item" />
+  ),
+  () => (
+    <div
+      style={{ backgroundColor: "hsl(10, 68%, 69%)" }}
+      className="item wide"
+    />
+  ),
+];
 
 export default function LCP() {
   const [elements, setElements] = React.useState(0);
@@ -9,46 +36,32 @@ export default function LCP() {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setElements(
-        (count) => count < 5 ?
-          count + 1 :
-          count
-      );
+      setElements((count) => (count < 5 ? count + 1 : count));
     }, 200);
 
     return () => {
       clearInterval(interval);
-    }
+    };
   });
 
-  const loadPage = async () => {
-    animate("div.item", {
-      opacity: [0, 1],
-      scale: [0.7, 1]
-    }, {
-      delay: stagger(0.2, { startDelay: 0.2 }),
-      type: 'spring',
-      damping: 20,
-      stiffness: 100
-    });
-  }
-
   const handleRefresh = () => {
-    loadPage();
-  }
+    setElements(0);
+  };
 
-  return <section className={styles.container}>
-    <div className={styles.page} ref={scope}>
-      {range(elements).map((i) => (
-        <div key={i} className="item" />
-      ))}
-    </div>
-    <div className={styles.control}>
-      <h4>Cumulative Layout Shift</h4>
-      <button
-        onClick={handleRefresh}
-        className={styles.replay}
-      >Refresh</button>
-    </div>
-  </section>
+  return (
+    <section className={styles.container}>
+      <div className={styles.page} ref={scope}>
+        {range(elements).map((i) => {
+          const Item = items[i];
+          return <Item key={i} />;
+        })}
+      </div>
+      <div className={styles.control}>
+        <h4>Cumulative Layout Shift</h4>
+        <button onClick={handleRefresh} className={styles.replay}>
+          Refresh
+        </button>
+      </div>
+    </section>
+  );
 }
