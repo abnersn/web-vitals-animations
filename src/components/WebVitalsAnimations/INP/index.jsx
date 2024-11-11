@@ -41,7 +41,7 @@ export default function INP() {
         <div className={inpStyles.item} />
       </div>
       <div className={styles.control}>
-        <h4>Interaction to Next Pain</h4>
+        <h4>Interaction to Next Paint</h4>
         <Timer ref={timerRef} />
         <p className={styles.info}>Click button to trigger INP</p>
       </div>
