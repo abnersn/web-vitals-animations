@@ -11,7 +11,7 @@ const Timer = React.forwardRef((_props, ref) => {
       if (isActive) {
         setTime((t) => t + 1);
       };
-    });
+    }, 1);
     return () => clearInterval(interval);
   });
 
