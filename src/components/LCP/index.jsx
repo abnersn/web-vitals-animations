@@ -53,7 +53,7 @@ export default function LCP() {
         type: "spring",
         damping: 20,
         stiffness: 100,
-      },
+      }
     );
     animate(
       `div.${styles.main}`,
@@ -66,7 +66,7 @@ export default function LCP() {
         type: "spring",
         damping: 20,
         stiffness: 100,
-      },
+      }
     ).then(() => {
       timerRef.current.stop();
     });

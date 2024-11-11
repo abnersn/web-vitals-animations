@@ -39,11 +39,22 @@
 }
 
 .item {
-  background: hsl(214, 68%, 69%);
   border-radius: 2px;
-  &.wide {
-    grid-column: 1/-1;
-  }
+  order: 1;
+}
+
+.headerItem {
+  order: 0;
+}
+
+.footerItem {
+  order: 2;
+}
+
+.headerItem,
+.footerItem {
+  border-radius: 2px;
+  grid-column: 1/-1;
 }
 
 .replay {
@@ -68,7 +79,7 @@
   }
 }
 
-.timer {
+.counter {
   font-size: 32px;
   line-height: 1;
   strong {
